@@ -66,6 +66,7 @@ h1 {
 }
 h3 {
   margin-bottom: 20px;
+  font-weight: 500;
 }
 
 section.currency-convertor {
@@ -75,9 +76,7 @@ section.currency-convertor {
 .current-rate {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  width: 50%;
   padding: 5px 0 18px;
   overflow: hidden;
 }
@@ -90,6 +89,7 @@ section.currency-convertor {
 .current-rate span {
   font-size: 0.8em;
   font-weight: 700;
+  width: 86px;
 }
 
 .current-rate span.red {

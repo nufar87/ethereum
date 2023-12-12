@@ -35,7 +35,8 @@ function Currency() {
 
     useEffect(() => {
         const oneDollar = 1/rate
-        if (dollar && dollar>0) setEthereum((dollar*oneDollar).toFixed(5)) 
+        if (dollar && dollar>0) 
+        setEthereum((dollar*oneDollar).toFixed(3)) 
     }, [rate, dollar])
 
     const setArrow = ()=> {
@@ -64,18 +65,6 @@ function Currency() {
            </section>
            <h3>ETH to USD Convertor</h3>
             <Grid container spacing={0}>
-                <>
-                {/* <Grid item xs={6} md={6} lg={6}> */}
-                    {/* <TextfieldContainer currency ={'Ethereum'} currencyRate= {'ETH 1'}/> */}
-                    {/* <TextfieldContainer currency ={'Ethereum'} currencyRate= {`${ethereum}`}/> */}
-                    {/* onChange={updateEthereumAmount} */}
-                {/* </Grid> */}
-                {/* <Grid item xs={6} md={6} lg={6}> */}
-                    {/* <TextfieldContainer currency ={'Dollar'} currencyRate={`$ ${data[data.length-1][1].toFixed(2)}`}/> */}
-                    {/* <TextfieldContainer currency ={'Dollar'} currencyRate={`$ ${dollar}`}/>       */}
-                    {/* onChange= {updateDollarAmount}               */}
-                {/* </Grid> */}
-                </>
                 <InputAmount currency ={'Ethereum'} currencyType={'ETH'} defaultValue = {1}  value={ethereum} setValue={setEthereum} />
                 <InputAmount currency ={'Dollar'} currencyType={'$'} defaultValue = {rate} value={dollar} setValue={setDollar}/>
             </Grid>

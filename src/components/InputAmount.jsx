@@ -9,12 +9,11 @@ const InputAmount = ({currency, currencyType, value, setValue}) => {
             label={currency}
             value={value}
             onChange={(e)=> {
-                setValue(e.target.value)     
+                setValue(e.target.value)   
             }}
             fullWidth
             size='small'
             InputProps={{
-                style: {  },
                 type: "number",
                 startAdornment: <InputAdornment position="start">{currencyType}</InputAdornment>
             }}
@@ -24,8 +23,27 @@ const InputAmount = ({currency, currencyType, value, setValue}) => {
                 label: { color: 'rgba(240,248,255, 0.5)' },
                " & .css-1pnmrwp-MuiTypography-root": {color: '#ffffff' },
                "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {borderColor: 'rgba(240,248,255, 0.2)' },
-                "& .MuiOutlinedInput-notchedOutline.Mui-focused": {
-                    borderColor: 'rgba(240,248,255, 0.2)' 
+           
+                //override input type number arrows
+                "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
+                    display: "none"
+                },
+                "& input[type=number]": {
+                    MozAppearance: "textfield",
+                },
+                //override input hover and focus 
+                "& .MuiOutlinedInput-root": {
+                    "&.Mui-focused fieldset": {
+                        borderColor: "rgba(240,248,255, 0.2)"
+                    },
+                   
+                    "&:hover fieldset": {
+                        borderColor: "rgba(240,248,255, 0.2)"
+                    }
+                },
+                //override label focus color 
+                "& label.Mui-focused": {
+                    color: 'rgba(240,248,255, 0.5)'
                 },
             }}
         />
