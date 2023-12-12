@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import TextfieldContainer from "./TextfieldContainer";
 import {Grid} from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-
+import InputAmount from "./InputAmount";
 
 function Currency() {
     const [data, setData] = useState([])
+    const [rate, setRate] = useState('')
     const [diff, setDiff] = useState('')
+    const [ethereum, setEthereum] = useState(1)
+    const [dollar, setDollar] = useState()
 
     useEffect(()=>{
         const fetchData = async () => {
@@ -22,9 +24,19 @@ function Currency() {
         if (data.length===0) return;
         const oldRate = data[0][1]
         const currRate = data[data.length-1][1]
+        setRate(currRate)
         const calculatedDiff = ((oldRate/currRate -1)*100).toFixed(2)
         setDiff(calculatedDiff)
     }, [data])
+
+    useEffect(() => {
+        if (ethereum && ethereum>0) setDollar((ethereum*rate).toFixed(2)) 
+    }, [rate, ethereum])
+
+    useEffect(() => {
+        const oneDollar = 1/rate
+        if (dollar && dollar>0) setEthereum((dollar*oneDollar).toFixed(5)) 
+    }, [rate, dollar])
 
     const setArrow = ()=> {
         const color = diff>0 ? 'green' : 'red';
@@ -47,17 +59,25 @@ function Currency() {
         <div className='container'>
           {  data.length >0 ? <div>
            <section className='current-rate'>
-                <h1>{`$${data[0][1].toFixed(2)}`}</h1>
+                <h1>{`$${Math.abs(rate).toFixed(2)}`}</h1>
                 {setArrow()}
            </section>
            <h3>ETH to USD Convertor</h3>
             <Grid container spacing={0}>
-                <Grid item xs={6} md={6} lg={6}>
-                    <TextfieldContainer currency ={'Ethereum'} currencyRate= {'ETH 1'}/>
-                </Grid>
-                <Grid item xs={6} md={6} lg={6}>
-                    <TextfieldContainer currency ={'Dollar'} currencyRate={`$${data[0][1].toFixed(2)}`}/>
-                </Grid>
+                <>
+                {/* <Grid item xs={6} md={6} lg={6}> */}
+                    {/* <TextfieldContainer currency ={'Ethereum'} currencyRate= {'ETH 1'}/> */}
+                    {/* <TextfieldContainer currency ={'Ethereum'} currencyRate= {`${ethereum}`}/> */}
+                    {/* onChange={updateEthereumAmount} */}
+                {/* </Grid> */}
+                {/* <Grid item xs={6} md={6} lg={6}> */}
+                    {/* <TextfieldContainer currency ={'Dollar'} currencyRate={`$ ${data[data.length-1][1].toFixed(2)}`}/> */}
+                    {/* <TextfieldContainer currency ={'Dollar'} currencyRate={`$ ${dollar}`}/>       */}
+                    {/* onChange= {updateDollarAmount}               */}
+                {/* </Grid> */}
+                </>
+                <InputAmount currency ={'Ethereum'} currencyType={'ETH'} defaultValue = {1}  value={ethereum} setValue={setEthereum} />
+                <InputAmount currency ={'Dollar'} currencyType={'$'} defaultValue = {rate} value={dollar} setValue={setDollar}/>
             </Grid>
             </div> : null}
         </div>

@@ -1,4 +1,4 @@
-import {Box,TextField } from '@mui/material';
+import {Box,TextField} from '@mui/material';
 
 const TextfieldContainer = ({currency, currencyRate}) => {
   return (
@@ -8,8 +8,10 @@ const TextfieldContainer = ({currency, currencyRate}) => {
                 id="read-only-input"
                 label={currency}
                 value={currencyRate}
+
                 InputLabelProps={{
                     style: { color:'rgba(240,248,255, 0.6)' },
+                    type: 'number',
                 }}
                 size='small'
                 style={{backgroundColor: 'transparent' }}
